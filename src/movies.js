@@ -15,25 +15,79 @@ console.log(getAllDirectors(movies));
 // How could you "clean" a bit this array and make it unified (without duplicates)?
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
-function howManyMovies() {}
+function howManyMovies(moviesParameter) {
+  let dramaSpielbergFilter = moviesParameter.filter( (eachMovie) => {
+    return (eachMovie.director === 'Steven Spielberg') && (eachMovie.genre.includes("Drama"));
+  });
+  return dramaSpielbergFilter;
+}
+
+console.log(howManyMovies(movies));
 
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
-function scoresAverage() {}
+function scoresAverage(moviesParameter) {
+  let allScores = moviesParameter.reduce( (accumulator, getMovie) => {
+    if (getMovie.score === undefined) {
+      return accumulator;
+    } else {
+      return accumulator + getMovie.score;
+    }
+  }, 0);
+  let averageOperation = allScores / moviesParameter.length;
+  let roundScore = averageOperation.toFixed(2);
+  let twoDigitScore = parseFloat(roundScore);
+  return twoDigitScore;
+}
+
+console.log(scoresAverage(movies));
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
-function dramaMoviesScore() {}
+function dramaMoviesScore(moviesParameter) {
+  let filteredDrama = moviesParameter.filter( (eachMovie) => {
+    return eachMovie.genre.includes("Drama");
+  });
+  let averageDramaMovies = filteredDrama.reduce( (accumulator, getMovie) => {
+    if (getMovie.score === undefined) {
+      return accumulator;
+    } else {
+      return accumulator + getMovie.score;
+    }
+  }, 0);
+  let averageDramaScore = averageDramaMovies / filteredDrama.length;
+  return averageDramaScore;
+}
+
+console.log(dramaMoviesScore(movies));
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
-function orderByYear() {}
+function orderByYear(moviesParameter) {
+  let movieArrayClone = JSON.parse(JSON.stringify(moviesParameter));
+  movieArrayClone.sort( (elemento1, elemento2) => {
+    if (elemento1.year > elemento2.year) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+  return movieArrayClone;
+}
+
+console.log(orderByYear(movies));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 function orderAlphabetically() {}
 
+console.log()
+
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes() {}
 
+console.log()
+
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg() {}
+
+console.log()
 
 
 
