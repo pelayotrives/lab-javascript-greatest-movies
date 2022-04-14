@@ -65,8 +65,18 @@ function orderByYear(moviesParameter) {
   movieArrayClone.sort( (elemento1, elemento2) => {
     if (elemento1.year > elemento2.year) {
       return 1;
-    } else {
+    } else if (elemento1.year < elemento2.year) {
       return -1;
+    } else {
+      if (elemento1.year === elemento2.year) {
+        if (elemento1.title[0] > elemento2.title[0] ) {
+          return 1;
+        } else if (elemento1.title[0] < elemento2.title[0] ) {
+          return -1;
+        } else {
+          return 0;
+        }
+      }
     }
   });
   return movieArrayClone;
@@ -75,9 +85,19 @@ function orderByYear(moviesParameter) {
 console.log(orderByYear(movies));
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically() {}
+function orderAlphabetically(moviesParameter) {
+  let movieArrayClone = JSON.parse(JSON.stringify(moviesParameter));
+  movieArrayClone.sort( (elemento1, elemento2) => {
+    if (elemento1.title > elemento2.title) {
+      return 1;
+    } else {
+      return -1;
+    }
+  });
+  return movieArrayClone.slice(0,20);
+}
 
-console.log()
+console.log(orderAlphabetically(movies));
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 function turnHoursToMinutes() {}
